@@ -30,6 +30,35 @@ class TDolidacticiel extends TObjetStd {
 		return 2;
 	}	
 	
+	static function getAll(&$PDOdb,&$user, $withAchievement=true) {
+		$level = self::getLevelFromUser($user);
+		
+		$TRes = $PDOdb->ExecuteAsArray("SELECT d.rowid 
+					FROM ".MAIN_DB_PREFIX."dolidacticiel d 
+					LEFT JOIN ".MAIN_DB_PREFIX."dolidacticiel_user du ON (du.fk_dolidacticiel = d.rowid)
+					WHERE d.level<=".$level." ");
+		$Tab=array();					
+		foreach($TRes as $row) {
+			
+			$d = new TDolidacticiel;
+			$d->load($PDOdb, $row->rowid);
+			
+			$rights = !empty($d->rights) ? eval('return ('.$d->rights.' == 1);') : true;
+			
+			if($rights === true) {
+				
+				if($withAchievement) $d->currentUserAchievement = $d->getUserAchievement($user->id);
+				
+				$Tab[] = $d;	
+			}
+			
+		}	
+		
+		return $Tab;
+		
+		
+	}
+	
 	static function testConditions(&$PDOdb,&$user,&$object, $action) {
 		
 		$level = self::getLevelFromUser($user);
@@ -60,6 +89,18 @@ class TDolidacticiel extends TObjetStd {
 			
 		}	
 		
+	}
+	function getUserAchievement($fk_user) {
+		
+		foreach($this->TDolidacticielUser as &$ddu) {
+			
+			if($ddu->fk_user == $fk_user) {
+				return true;
+			}
+			
+		}
+		
+		return false;
 	}
 }
 
