@@ -18,11 +18,11 @@ class TDolidacticiel extends TObjetStd {
         $this->add_champs('cond', array('type'=>'text'));
         $this->add_champs('level',array('type'=>'int', 'index'=>true, 'rules'=>array('min'=>0, 'max'=>2)));
         
-        $this->_init_vars('title,description');
+        $this->_init_vars('title,description,rights');
         
-		$this->setChild('TDolidacticiel_user', 'fk_dolidacticiel');
-		
-        $this->start();
+	    $this->start();
+	
+		$this->setChild('TDolidacticielUser', 'fk_dolidacticiel');
 		
     }
 
@@ -43,16 +43,15 @@ class TDolidacticiel extends TObjetStd {
 			
 			$d = new TDolidacticiel;
 			$d->load($PDOdb, $row->rowid);
-
+			
+			$rights = !empty($d->rights) ? eval('return ('.$d->rights.' == 1);') : true;
 			$eval = !empty($d->cond) ? eval('return ('.$d->cond.');') : true;
-			/*print 'return ('.$d->cond.')';
-			var_dump($eval,$object->zip, $object->oldcopy->zip);
-			exit;*/
-			if($eval === true) {
-				
-				$k = $d->addChild($PDOdb, 'TDolidacticiel_user');
-				$d->TDolidacticiel_user[$k]->fk_user = $user->id;
-				$d->TDolidacticiel_user[$k]->achievement=1;
+			
+			if($eval === true && $rights === true) {
+				$k = $d->addChild($PDOdb, 'TDolidacticielUser');
+				//var_dump($d->TDolidacticielUser);
+				$d->TDolidacticielUser[$k]->fk_user = $user->id;
+				$d->TDolidacticielUser[$k]->achievement=1;
 				$d->save($PDOdb);
 				
 				setEventMessage('GG WP'.$d->code.' : '.$d->title."\n".$d->description);
@@ -64,7 +63,7 @@ class TDolidacticiel extends TObjetStd {
 	}
 }
 
-Class TDolidacticiel_user extends TObjetStd {
+Class TDolidacticielUser extends TObjetStd {
     function __construct() {
         $this->set_table(MAIN_DB_PREFIX.'dolidacticiel_user');
         $this->add_champs('fk_dolidacticiel,fk_user',array('type'=>'int', 'index'=>true));

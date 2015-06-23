@@ -19,7 +19,7 @@ $PDOdb=new TPDOdb;
 $d=new TDolidacticiel;
 $d->init_db_by_vars($PDOdb);
 
-$o=new TDolidacticiel_user;
+$o=new TDolidacticielUser;
 $o->init_db_by_vars($PDOdb);
 
 
@@ -39,6 +39,7 @@ $d->set_values(array(
 	,'action'=>'COMPANY_CREATE'
 	,'cond'=>'$object->name === "Test"'
 	,'level'=>0
+	,'rights'=>'$user->rights->societe->creer'
 	
 ));
 $d->save($PDOdb);
@@ -53,7 +54,7 @@ $d->set_values(array(
 	,'action'=>'COMPANY_MODIFY'
 	,'cond'=>'$object->zip != $object->oldcopy->zip'
 	,'level'=>0
-	
+	,'rights'=>'$user->rights->societe->creer'
 ));
 $d->save($PDOdb);
 
@@ -68,7 +69,7 @@ $d->set_values(array(
 	,'action'=>'COMPANY_DELETE'
 	,'cond'=>'$object->name === "Test"'
 	,'level'=>0
-	
+	,'rights'=>'$user->rights->societe->creer'
 ));
 $d->save($PDOdb);
 
