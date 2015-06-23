@@ -1,7 +1,14 @@
 Module104640Name = dolidacticiel
-Module104640Desc = dolidacticiel Descripion
+Module104640Desc = Module servant de formation initiale au nouveau utilisateur. 
 
 ATMAbout = Ce module a été développé par <a href="http://www.atm-consulting.fr" target="_blank">ATM Consulting</a><br>Vous pouvez retrouver la documentation sur notre <a href="http://wiki.atm-consulting.fr/index.php/Accueil" target="_blank">wiki</a><br><br>Pour toute question technique ou retour, contactez-nous sur <a href="mailto:support@atm-consulting.fr">support@atm-consulting.fr</a><br><br>Pour toute question commerciale, contactez-nous sur <a href="mailto:contact@atm-consulting.fr">contact@atm-consulting.fr</a> ou au +33 9 77 19 50 70<br><br>Retrouvez nos autres modules sur <a href="http://www.dolistore.com/search.php?orderby=position&orderway=desc&search_query=atm&submit_search=Rechercher" target="_blank">Dolistore</a>
 
 dolidacticielSetup = Configuration du module dolidacticiel
 dolidacticielAbout = A propos du module dolidacticiel
+
+titleT1=Votre premier tiers
+descriptionT1=Creez un tiers nommé "Test" (en respectant cette orthographe précis)
+titleT2=Modifiez un tiers
+descriptionT2=Changez son code postal
+titleT3=Suppression d'un tiers
+descriptionT3=Supprimez le tiers nommé "Test"

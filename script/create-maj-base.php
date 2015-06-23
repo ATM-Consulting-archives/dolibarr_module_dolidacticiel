@@ -11,13 +11,66 @@ if(!defined('INC_FROM_DOLIBARR')) {
 }
 
 
-/* uncomment
 
-
-dol_include_once('/mymodule/class/xxx.class.php');
+dol_include_once('/dolidacticiel/class/dolidacticiel.class.php');
 
 $PDOdb=new TPDOdb;
 
-$o=new TXXX($db);
+$d=new TDolidacticiel;
+$d->init_db_by_vars($PDOdb);
+
+$o=new TDolidacticiel_user;
 $o->init_db_by_vars($PDOdb);
-*/
+
+
+/*
+ * Init du didacticiel
+ */
+$langs->load("dolidacticiel@dolidacticiel");
+  
+ 
+$code = 'T1';
+$d=new TDolidacticiel;
+$d->loadBy($PDOdb, $code, 'code');
+$d->set_values(array(
+	'code'=>$code
+	,'title'=>$langs->trans('title'.$code)
+	,'description'=>$langs->trans('description'.$code)
+	,'action'=>'COMPANY_CREATE'
+	,'cond'=>'$object->name === "Test"'
+	,'level'=>0
+	
+));
+$d->save($PDOdb);
+
+$code = 'T2';
+$d=new TDolidacticiel;
+$d->loadBy($PDOdb, $code, 'code');
+$d->set_values(array(
+	'code'=>$code
+	,'title'=>$langs->trans('title'.$code)
+	,'description'=>$langs->trans('description'.$code)
+	,'action'=>'COMPANY_MODIFY'
+	,'cond'=>'$object->zip != $object->oldcopy->zip'
+	,'level'=>0
+	
+));
+$d->save($PDOdb);
+
+
+$code = 'T3';
+$d=new TDolidacticiel;
+$d->loadBy($PDOdb, $code, 'code');
+$d->set_values(array(
+	'code'=>$code
+	,'title'=>$langs->trans('title'.$code)
+	,'description'=>$langs->trans('description'.$code)
+	,'action'=>'COMPANY_DELETE'
+	,'cond'=>'$object->name === "Test"'
+	,'level'=>0
+	
+));
+$d->save($PDOdb);
+
+
+

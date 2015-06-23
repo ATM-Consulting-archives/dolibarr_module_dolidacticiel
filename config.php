@@ -1,4 +1,4 @@
 <?php
 
-	require(_DIR__.'/config.default.php');
+	require(__DIR__.'/config.default.php');
 

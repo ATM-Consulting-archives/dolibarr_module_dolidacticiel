@@ -23,14 +23,12 @@
  * 				Put some comments here
  */
 // Dolibarr environment
-$res = @include("../../main.inc.php"); // From htdocs directory
-if (! $res) {
-    $res = @include("../../../main.inc.php"); // From "custom" directory
-}
+require('../config.php');
 
 // Libraries
 require_once DOL_DOCUMENT_ROOT . "/core/lib/admin.lib.php";
 require_once '../lib/dolidacticiel.lib.php';
+dol_include_once('/dolidacticiel/class/dolidacticiel.class.php');
 
 // Translations
 $langs->load("dolidacticiel@dolidacticiel");
@@ -39,6 +37,41 @@ $langs->load("dolidacticiel@dolidacticiel");
 if (! $user->admin) {
     accessforbidden();
 }
+
+	/*$PDOdb=new TPDOdb;
+	if(isset($_REQUEST['action']) && $_REQUEST['action']=='save') {
+		
+		if(!empty($_REQUEST['TDolidacticiel'])) {
+			foreach($_REQUEST['TDolidacticiel'] as $id=>$TValues) {
+				
+				$d=new TDolidacticiel;
+				$d->load($PDOdb, $id);
+				$d->set_values($TValues);
+				
+				if(isset($TValues['delete'])) {
+					$d->delete($PDOdb);
+				}
+				else {
+					$d->save($PDOdb);	
+				}
+			}
+            
+            setEventMessage($langs->trans('Saved'));
+		}
+		
+		$newTA = & $_REQUEST['TDolidacticielNew']; 
+		
+		//print_r($_REQUEST['TDolidacticielNew']);
+		
+		if(!empty($newTA['typeAbsence']) && !empty($newTA['libelleAbsence'])) {
+			
+			$ta=new TRH_TypeAbsence;
+			$ta->set_values($newTA);
+			$ta->save($PDOdb);
+		}
+		
+	}
+	*/
 
 // Parameters
 $action = GETPOST('action', 'alpha');
@@ -98,7 +131,7 @@ dol_fiche_head(
 // Setup page goes here
 $form=new Form($db);
 $var=false;
-print '<table class="noborder" width="100%">';
+/*print '<table class="noborder" width="100%">';
 print '<tr class="liste_titre">';
 print '<td>'.$langs->trans("Parameters").'</td>'."\n";
 print '<td align="center" width="20">&nbsp;</td>';
@@ -107,7 +140,7 @@ print '<td align="center" width="100">'.$langs->trans("Value").'</td>'."\n";
 
 // Example with a yes / no select
 $var=!$var;
-print '<tr '.$bc[$var].'>';
+/*print '<tr '.$bc[$var].'>';
 print '<td>'.$langs->trans("ParamLabel").'</td>';
 print '<td align="center" width="20">&nbsp;</td>';
 print '<td align="right" width="300">';
@@ -120,7 +153,76 @@ print '</form>';
 print '</td></tr>';
 
 print '</table>';
+*/
 
+/*
+	$TAbsenceType = TRH_TypeAbsence::getList($PDOdb);
+	$absenceTypeDummy = new TRH_TypeAbsence;
+	$form=new TFormCore($_SERVER['PHP_SELF'],'form1','POST');
+	$form->Set_typeaff('edit');
+	echo $form->hidden('action', 'save');
+	$TFormAbsenceType=array();
+	foreach($TAbsenceType as $absenceType) {
+		
+		$TFormAbsenceType[]=array(
+			'typeAbsence'=>$form->texte('', 'TDolidacticiel['.$absenceType->getId().'][typeAbsence]', $absenceType->typeAbsence, 15,50)
+			,'libelleAbsence'=>$form->texte('', 'TDolidacticiel['.$absenceType->getId().'][libelleAbsence]', $absenceType->libelleAbsence, 30,255)
+			,'codeAbsence'=>$form->texte('', 'TDolidacticiel['.$absenceType->getId().'][codeAbsence]', $absenceType->codeAbsence, 6,10)
+			
+			,'colorId'=>$form->combo('', 'TDolidacticiel['.$absenceType->getId().'][colorId]', $absenceTypeDummy->TColorId , $absenceType->colorId)
+			
+			,'unite'=>$form->combo('', 'TDolidacticiel['.$absenceType->getId().'][unite]', $absenceTypeDummy->TUnite , $absenceType->unite)
+			,'decompteNormal'=>$form->combo('', 'TDolidacticiel['.$absenceType->getId().'][decompteNormal]', $absenceTypeDummy->TDecompteNormal , $absenceType->decompteNormal)
+            ,'secable'=>$form->combo('', 'TDolidacticiel['.$absenceType->getId().'][insecable]', $absenceTypeDummy->TForAdmin , $absenceType->insecable)
+            ,'isPresence'=>$form->hidden( 'TDolidacticiel['.$absenceType->getId().'][isPresence]', 0)
+			,'admin'=>$form->combo('', 'TDolidacticiel['.$absenceType->getId().'][admin]', $absenceTypeDummy->TForAdmin , $absenceType->admin)
+			
+			,'delete'=>$form->checkbox1('', 'TDolidacticiel['.$absenceType->getId().'][delete]', 1)
+		);
+		
+	}
+	$TFormAbsenceTypeNew=array(
+			'typeAbsence'=>$form->texte('', 'TDolidacticielNew[typeAbsence]', '', 15,50)
+			,'libelleAbsence'=>$form->texte('', 'TDolidacticielNew[libelleAbsence]', '', 30,255)
+			,'codeAbsence'=>$form->texte('', 'TDolidacticielNew[codeAbsence]', '', 6,10)
+			
+			,'unite'=>$form->combo('', 'TDolidacticielNew[unite]', $absenceTypeDummy->TUnite , null)
+			,'decompteNormal'=>$form->combo('', 'TDolidacticielNew[decompteNormal]', $absenceTypeDummy->TDecompteNormal , null)
+			,'isPresence'=>$form->hidden( 'TDolidacticielNew[isPresence]', 0)
+			,'admin'=>$form->combo('', 'TDolidacticielNew[admin]', $absenceTypeDummy->TForAdmin , null)
+			
+			,'colorId'=>$form->combo('', 'TDolidacticielNew[colorId]', $absenceTypeDummy->TColorId , null)
+		);
+	$TBS=new TTemplateTBS();
+	print $TBS->render('./tpl/typeAbsence.tpl.php'
+		,array(
+			'typeAbsence'=>$TFormAbsenceType
+		)
+		,array(
+			'typeAbsenceNew'=>$TFormAbsenceTypeNew
+			,'view'=>array(
+				'head'=>dol_get_fiche_head(adminCongesPrepareHead('compteur')  , 'typeabsence', $langs->trans('AbsencesPresencesAdministration'))
+			)
+			,'translate' => array(
+				'Code' => $langs->trans('Code'),
+				'Wording' => $langs->trans('Wording'),
+				'Unit' => $langs->trans('Unit'),
+				'AccountingOfficerCode' => $langs->trans('AccountingOfficerCode'),
+				'AbsenceSecable' => $langs->trans('AbsenceSecable'),
+				'ColorCode' => $langs->trans('ColorCode'),
+				'AskReservedAdmin' => $langs->trans('AskReservedAdmin'),
+				'OnlyCountBusinessDay' => $langs->trans('OnlyCountBusinessDay'),
+				'New' => $langs->trans('New'),
+				'Register' => $langs->trans('Register'),
+				'AskDelete' => $langs->trans('AskDelete')
+			)
+		)	
+		
+	);
+	
+	echo $form->end_form();	
+	
+*/
 llxFooter();
 
 $db->close();
