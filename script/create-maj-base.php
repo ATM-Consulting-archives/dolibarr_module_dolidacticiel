@@ -74,4 +74,18 @@ $d->set_values(array(
 $d->save($PDOdb);
 
 
+$code = 'P1';
+$d=new TDolidacticiel;
+$d->loadBy($PDOdb, $code, 'code');
+$d->set_values(array(
+    'code'=>$code
+    ,'title'=>$langs->trans('title'.$code)
+    ,'description'=>$langs->trans('description'.$code)
+    ,'action'=>'PRODUCT_CREATE'
+    ,'cond'=>'$object->ref === "P01"'
+    ,'level'=>0
+    ,'rights'=>'$user->rights->produit->creer'
+));
+$d->save($PDOdb);
+
 
