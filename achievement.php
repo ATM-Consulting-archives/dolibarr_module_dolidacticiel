@@ -13,19 +13,19 @@
 	
 	llxHeader();
 	
-    $head = user_prepare_head($object);
+    $head = user_prepare_head($u);
 
     $title = $langs->trans("Achievements");
-    dol_fiche_head($head, 'user', $title, 0, 'achievement');
+    dol_fiche_head($head, 'achievements', $title);
     
 	$PDOdb = new TPDOdb;
 	
 	$Tab= TDolidacticiel::getAll($PDOdb, $u);
 	
-	print '<table>';
+	print '<table class="border" width="100%">';
 	foreach($Tab as &$d) {
 		
-		print '<tr><td>'.$d->title.'</td><td>'.($d->currentUserAchievement ? img_picto('Ok', 'redstar') : 'Non Fait').'</td></tr>';
+		print '<tr><td width="50%"><strong>'.$d->title.'</strong><br />'.$d->description.'</td><td>'.($d->currentUserAchievement ? img_picto('Ok', 'star') : '' ).'</td></tr>';
 		
 	}
 	
