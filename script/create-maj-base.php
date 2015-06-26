@@ -40,6 +40,7 @@ $d->set_values(array(
 	,'cond'=>'$object->name === "Test"'
 	,'level'=>0
 	,'rights'=>'$user->rights->societe->creer'
+	,'tips'=>'a.vsmenu[href*="/societe/soc.php?action=create"]'
 	
 ));
 $d->save($PDOdb);
@@ -55,6 +56,7 @@ $d->set_values(array(
 	,'cond'=>'$object->zip != $object->oldcopy->zip'
 	,'level'=>0
 	,'rights'=>'$user->rights->societe->creer'
+	,'tips'=>'input[name=zipcode]'
 ));
 $d->save($PDOdb);
 
@@ -70,6 +72,7 @@ $d->set_values(array(
 	,'cond'=>'$object->name === "Test"'
 	,'level'=>0
 	,'rights'=>'$user->rights->societe->creer'
+	,'tips'=>'span#action-delete'
 ));
 $d->save($PDOdb);
 
