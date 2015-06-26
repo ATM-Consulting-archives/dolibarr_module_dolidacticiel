@@ -85,6 +85,7 @@ $d->set_values(array(
     ,'cond'=>'$object->ref === "P01"'
     ,'level'=>0
     ,'rights'=>'$user->rights->produit->creer'
+    ,'tips'=>'a.vsmenu[href*="/product/card.php?leftmenu=product&action=create&type=0"]'
 ));
 $d->save($PDOdb);
 

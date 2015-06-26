@@ -89,6 +89,8 @@ class moddolidacticiel extends DolibarrModules
 		//                        );
 		$this->module_parts = array(
 			'triggers'=>1
+			,'js' => array('/dolidacticiel/js/dolidacticiel.js.php') 
+            ,'css' => array('/dolidacticiel/css/dolidacticiel.css')
 		);
 
 		// Data directories to create when module is enabled.
