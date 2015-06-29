@@ -18,7 +18,7 @@ $(document).ready(function() {
                
                 echo 'var obj = $(\''.$d->tips.'\').first();
                 var offset = obj.offset();
-                if(offset.top>0) {
+                if(offset && offset.top>0) {
                     
                     $("body").append(\'<div style="position:absolute; left:\'+(offset.left-20)+\'px; top:\'+(offset.top - 10)+\'px;" class="dolidacticielTips"><span class="code">'.$d->code.'</span><div class="content"><strong>'.$d->title.'</strong><br />'.$d->description.'</div></div>\');
                     

@@ -93,3 +93,17 @@ $d->set_values(array(
 $d->save($PDOdb);
 
 
+$code = 'PJ1';
+$d=new TDolidacticiel;
+$d->loadBy($PDOdb, $code, 'code');
+$d->set_values(array(
+    'code'=>$code
+    ,'title'=>$langs->trans('title'.$code)
+    ,'description'=>$langs->trans('description'.$code)
+    ,'action'=>'PROJECT_CREATE'
+    ,'cond'=>''
+    ,'level'=>0
+    ,'rights'=>'$user->rights->projet->creer'
+    ,'tips'=>'a.vsmenu[href*="/projet/card.php?leftmenu=projects&action=create"]'
+));
+$d->save($PDOdb);
