@@ -14,3 +14,9 @@ titleT2=Modifiez un tiers
 descriptionT2=Changez son code postal
 titleT3=Suppression d'un tiers
 descriptionT3=Supprimez le tiers nommé "Test"
+
+DolidacticielListOfUserAchievement=Liste des réussites par utilisateur
+DolidacticielResultAchievement=Fait / Pas fait
+DolidacticielCheck=Fait
+DolidacticielUncheck=Pas fait
+DolidacticielNoTestAvailable=Aucun test disponible

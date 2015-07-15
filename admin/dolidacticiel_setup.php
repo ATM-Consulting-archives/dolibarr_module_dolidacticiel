@@ -38,7 +38,8 @@ if (! $user->admin) {
     accessforbidden();
 }
 
-	/*$PDOdb=new TPDOdb;
+$PDOdb=new TPDOdb;
+	/*
 	if(isset($_REQUEST['action']) && $_REQUEST['action']=='save') {
 		
 		if(!empty($_REQUEST['TDolidacticiel'])) {
@@ -128,9 +129,56 @@ dol_fiche_head(
     "dolidacticiel@dolidacticiel"
 );
 
+
 // Setup page goes here
 $form=new Form($db);
 $var=false;
+
+//$t = TDolidacticiel::getAll($PDOdb,$user);var_dump($user->id);
+$TDolidacticielByUser = TDolidacticiel::getAllUser($PDOdb, $db, $conf);
+
+print '<table class="noborder" width="100%">';
+print '<tr class="liste_titre">';
+print '<td>'.$langs->trans("DolidacticielListOfUserAchievement").'</td>';
+print '<td align="center" width="20">&nbsp;</td>';
+print '<td align="right" width="100">'.$langs->trans("DolidacticielResultAchievement").'&nbsp;</td>';
+
+foreach ($TDolidacticielByUser as $row)
+{
+	$u = $row['user'];
+	$TDolidacticiel = $row['dolidacticiel'];
+	
+	
+	$var=!$var;
+	print '<tr class="'.($var ? 'pair' : 'impair').'">';
+	print '<td>'.$u->getNomUrl(1).'</td>';
+	print '<td align="center" width="20">&nbsp;</td>';
+	print '<td align="right" width="300"></td></tr>';
+	
+	if (count($TDolidacticiel) > 0)
+	{
+		foreach ($TDolidacticiel as $dacticiel)
+		{
+			$var=!$var;
+			print '<tr class="'.($var ? 'pair' : 'impair').'">';
+			print '<td>&nbsp;&nbsp;&nbsp;&nbsp;'.img_picto('', '1rightarrow').'&nbsp;'.$dacticiel->description.'</td>';
+			print '<td align="center" width="20">&nbsp;</td>';
+			print '<td align="right" width="300">';
+			print $dacticiel->currentUserAchievement ? $langs->trans('DolidacticielCheck') : $langs->trans('DolidacticielUncheck');
+			print '&nbsp;</td></tr>';
+		}	
+	}
+	else
+	{
+		$var=!$var;
+		print '<tr class="'.($var ? 'pair' : 'impair').'">';
+		print '<td>&nbsp;&nbsp;&nbsp;&nbsp;'.img_picto('', '1rightarrow').'&nbsp;<em>'.$langs->trans('DolidacticielNoTestAvailable').'</em></td>';
+		print '<td align="center" width="20">&nbsp;</td>';
+		print '<td align="right" width="300"></td></tr>';
+	}
+	
+}
+
 /*print '<table class="noborder" width="100%">';
 print '<tr class="liste_titre">';
 print '<td>'.$langs->trans("Parameters").'</td>'."\n";

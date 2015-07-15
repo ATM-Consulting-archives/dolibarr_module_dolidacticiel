@@ -30,33 +30,55 @@ class TDolidacticiel extends TObjetStd {
 		return 2;
 	}	
 	
-	static function getAll(&$PDOdb,&$user, $withAchievement=true) {
+	static function getAll(&$PDOdb,&$user, $withAchievement=true) 
+	{
 		$level = self::getLevelFromUser($user);
 		
 		$TRes = $PDOdb->ExecuteAsArray("SELECT d.rowid 
 					FROM ".MAIN_DB_PREFIX."dolidacticiel d 
 					LEFT JOIN ".MAIN_DB_PREFIX."dolidacticiel_user du ON (du.fk_dolidacticiel = d.rowid)
 					WHERE d.level<=".$level." ");
-		$Tab=array();					
-		foreach($TRes as $row) {
-			
+					
+		$Tab=array();
+		foreach($TRes as $row) 
+		{
 			$d = new TDolidacticiel;
 			$d->load($PDOdb, $row->rowid);
 			
 			$rights = !empty($d->rights) ? eval('return ('.$d->rights.' == 1);') : true;
-			
-			if($rights === true) {
-				
+			if($rights === true) 
+			{
 				if($withAchievement) $d->currentUserAchievement = $d->getUserAchievement($user->id);
 				
-				$Tab[] = $d;	
+				$Tab[] = $d;
 			}
 			
 		}	
 		
 		return $Tab;
+	}
+	
+	
+	static function getAllUser(&$PDOdb, &$db, &$conf)
+	{
+		if (!class_exists('User')) dol_include_once('/user/class/user.class.php');
 		
+		$TRes = array();
+		$TUserId = $PDOdb->ExecuteAsArray('SELECT rowid FROM '.MAIN_DB_PREFIX.'user WHERE statut = 1');
 		
+		foreach ($TUserId as $obj)
+		{
+			$user = new User($db);
+			$user->fetch($obj->rowid);
+			$user->getrights();
+			
+			$TRes[] = array(
+				'user' => $user
+				,'dolidacticiel' => TDolidacticiel::getAll($PDOdb, $user)
+			);
+		}
+		
+		return $TRes;
 	}
 	
 	static function testConditions(&$PDOdb,&$user,&$object, $action) {
@@ -90,6 +112,7 @@ class TDolidacticiel extends TObjetStd {
 		}	
 		
 	}
+	
 	function getUserAchievement($fk_user) {
 		
 		foreach($this->TDolidacticielUser as &$ddu) {
