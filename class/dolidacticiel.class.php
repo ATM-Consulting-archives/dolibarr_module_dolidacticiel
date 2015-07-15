@@ -18,7 +18,7 @@ class TDolidacticiel extends TObjetStd {
         $this->add_champs('cond', array('type'=>'text'));
         $this->add_champs('level',array('type'=>'int', 'index'=>true, 'rules'=>array('min'=>0, 'max'=>2)));
         
-        $this->_init_vars('title,description,rights');
+        $this->_init_vars('title,description,rights,tips');
         
 	    $this->start();
 	
