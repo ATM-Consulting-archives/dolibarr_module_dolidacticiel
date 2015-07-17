@@ -30,6 +30,35 @@ class TDolidacticiel extends TObjetStd {
 		return 2;
 	}	
 	
+	/*
+	 * Get all test fait et non fait avec currentUserAchievement à true ou false
+	 */
+	static function getAllTest(&$PDOdb, &$user)
+	{
+		$level = self::getLevelFromUser($user);
+		
+		$TIdTest = $PDOdb->ExecuteAsArray("
+			SELECT rowid FROM ".MAIN_DB_PREFIX."dolidacticiel 
+			WHERE level <= ".$level."
+		");
+		
+		$TRes = array();
+		foreach ($TIdTest as $row)
+		{
+			$test = new TDolidacticiel;
+			$test->load($PDOdb, $row->rowid);
+			
+			$test->currentUserAchievement = $test->getUserAchievement($user->id);
+			
+			$TRes[] = $test;
+		}
+		
+		return $TRes;
+	}
+	
+	/*
+	 * Get only test efféctué par l'utilisateur
+	 */
 	static function getAll(&$PDOdb,&$user, $withAchievement=true) 
 	{
 		$level = self::getLevelFromUser($user);
@@ -74,7 +103,7 @@ class TDolidacticiel extends TObjetStd {
 			
 			$TRes[] = array(
 				'user' => $user
-				,'dolidacticiel' => TDolidacticiel::getAll($PDOdb, $user)
+				,'dolidacticiel' => TDolidacticiel::getAllTest($PDOdb, $user)
 			);
 		}
 		

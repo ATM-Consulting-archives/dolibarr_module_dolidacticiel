@@ -33,8 +33,12 @@ function dolidacticielAdminPrepareHead()
     $head = array();
 
     $head[$h][0] = dol_buildpath("/dolidacticiel/admin/dolidacticiel_setup.php", 1);
-    $head[$h][1] = $langs->trans("Parameters");
-    $head[$h][2] = 'settings';
+    $head[$h][1] = $langs->trans("Achievements");
+    $head[$h][2] = 'ggwp';
+    $h++;
+    $head[$h][0] = dol_buildpath("/dolidacticiel/admin/dolidacticiel_others.php", 1);
+    $head[$h][1] = $langs->trans("DolidacticielOthersTests");
+    $head[$h][2] = 'otherstests';
     $h++;
     $head[$h][0] = dol_buildpath("/dolidacticiel/admin/dolidacticiel_about.php", 1);
     $head[$h][1] = $langs->trans("About");
