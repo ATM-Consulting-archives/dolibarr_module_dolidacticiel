@@ -19,6 +19,8 @@ descriptionT3=Supprimez le tiers nommé "Test"
 
 titleP1=Votre premier produit
 descriptionP1=Creez un produit avec la référence "P01" (en respectant cette orthographe précis)
+titleP2=Modifiez le produit
+descriptionP2=Changez sa description avec "Lorem ipsum" (en respectant cette orthographe précis)
 titlePJ1=Votre premier projet
 descriptionPJ1=Creez un projet
 

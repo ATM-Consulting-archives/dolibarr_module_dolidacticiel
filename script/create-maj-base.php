@@ -33,7 +33,8 @@ $code = 'T1';
 $d=new TDolidacticiel;
 $d->loadBy($PDOdb, $code, 'code');
 $d->set_values(array(
-	'code'=>$code
+	'module'=>'TIERS'
+	,'code'=>$code
 	,'title'=>$langs->trans('title'.$code)
 	,'description'=>$langs->trans('description'.$code)
 	,'action'=>'COMPANY_CREATE'
@@ -49,7 +50,8 @@ $code = 'T2';
 $d=new TDolidacticiel;
 $d->loadBy($PDOdb, $code, 'code');
 $d->set_values(array(
-	'code'=>$code
+	'module'=>'TIERS'
+	,'code'=>$code
 	,'title'=>$langs->trans('title'.$code)
 	,'description'=>$langs->trans('description'.$code)
 	,'action'=>'COMPANY_MODIFY'
@@ -65,7 +67,8 @@ $code = 'T3';
 $d=new TDolidacticiel;
 $d->loadBy($PDOdb, $code, 'code');
 $d->set_values(array(
-	'code'=>$code
+	'module'=>'TIERS'
+	,'code'=>$code
 	,'title'=>$langs->trans('title'.$code)
 	,'description'=>$langs->trans('description'.$code)
 	,'action'=>'COMPANY_DELETE'
@@ -81,7 +84,8 @@ $code = 'P1';
 $d=new TDolidacticiel;
 $d->loadBy($PDOdb, $code, 'code');
 $d->set_values(array(
-    'code'=>$code
+    'module'=>'PRODUCT'
+	,'code'=>$code
     ,'title'=>$langs->trans('title'.$code)
     ,'description'=>$langs->trans('description'.$code)
     ,'action'=>'PRODUCT_CREATE'
@@ -93,11 +97,29 @@ $d->set_values(array(
 $d->save($PDOdb);
 
 
+$code = 'P2';
+$d=new TDolidacticiel;
+$d->loadBy($PDOdb, $code, 'code');
+$d->set_values(array(
+    'module'=>'PRODUCT'
+	,'code'=>$code
+    ,'title'=>$langs->trans('title'.$code)
+    ,'description'=>$langs->trans('description'.$code)
+    ,'action'=>'PRODUCT_MODIFY'
+    ,'cond'=>'$object->description === "Lorem ipsum"'
+    ,'level'=>0
+    ,'rights'=>'$user->rights->produit->creer'
+    ,'tips'=>'a:contains("P01"), a:contains("'.$langs->trans('Modify').'")'
+));
+$d->save($PDOdb);
+
+
 $code = 'PJ1';
 $d=new TDolidacticiel;
 $d->loadBy($PDOdb, $code, 'code');
 $d->set_values(array(
-    'code'=>$code
+    'module'=>'PROJECT'
+	,'code'=>$code
     ,'title'=>$langs->trans('title'.$code)
     ,'description'=>$langs->trans('description'.$code)
     ,'action'=>'PROJECT_CREATE'

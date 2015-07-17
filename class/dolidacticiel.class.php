@@ -14,7 +14,7 @@ class TDolidacticiel extends TObjetStd {
     function __construct() {
         $this->set_table(MAIN_DB_PREFIX.'dolidacticiel');
 
-        $this->add_champs('action,code', array('type'=>'string', 'index'=>true, 'length'=>100)  );
+        $this->add_champs('module,action,code', array('type'=>'string', 'index'=>true, 'length'=>100)  );
         $this->add_champs('cond', array('type'=>'text'));
         $this->add_champs('level',array('type'=>'int', 'index'=>true, 'rules'=>array('min'=>0, 'max'=>2)));
         
