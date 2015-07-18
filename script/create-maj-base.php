@@ -35,6 +35,7 @@ $d->loadBy($PDOdb, $code, 'code');
 $d->set_values(array(
 	'module'=>'TIERS'
 	,'code'=>$code
+	,'prev_code'=>''
 	,'title'=>$langs->trans('title'.$code)
 	,'description'=>$langs->trans('description'.$code)
 	,'action'=>'COMPANY_CREATE'
@@ -52,6 +53,7 @@ $d->loadBy($PDOdb, $code, 'code');
 $d->set_values(array(
 	'module'=>'TIERS'
 	,'code'=>$code
+	,'prev_code'=>'T1'
 	,'title'=>$langs->trans('title'.$code)
 	,'description'=>$langs->trans('description'.$code)
 	,'action'=>'COMPANY_MODIFY'
@@ -69,12 +71,13 @@ $d->loadBy($PDOdb, $code, 'code');
 $d->set_values(array(
 	'module'=>'TIERS'
 	,'code'=>$code
+	,'prev_code'=>'T3'
 	,'title'=>$langs->trans('title'.$code)
 	,'description'=>$langs->trans('description'.$code)
 	,'action'=>'COMPANY_DELETE'
 	,'cond'=>'$object->name === "Test"'
 	,'level'=>0
-	,'rights'=>'$user->rights->societe->creer'
+	,'rights'=>'$user->rights->societe->supprimer'
 	,'tips'=>'span#action-delete'
 ));
 $d->save($PDOdb);
@@ -86,6 +89,7 @@ $d->loadBy($PDOdb, $code, 'code');
 $d->set_values(array(
     'module'=>'PRODUCT'
 	,'code'=>$code
+	,'prev_code'=>''
     ,'title'=>$langs->trans('title'.$code)
     ,'description'=>$langs->trans('description'.$code)
     ,'action'=>'PRODUCT_CREATE'
@@ -103,13 +107,32 @@ $d->loadBy($PDOdb, $code, 'code');
 $d->set_values(array(
     'module'=>'PRODUCT'
 	,'code'=>$code
+	,'prev_code'=>'P1'
     ,'title'=>$langs->trans('title'.$code)
     ,'description'=>$langs->trans('description'.$code)
     ,'action'=>'PRODUCT_MODIFY'
+    ,'cond'=>'$object->ref === "P01"'
+    ,'level'=>0
+    ,'rights'=>'$user->rights->produit->supprimer'
+    ,'tips'=>'a:contains("P01"), a:contains("'.$langs->trans('Modify').'")'
+));
+$d->save($PDOdb);
+
+
+$code = 'P3';
+$d=new TDolidacticiel;
+$d->loadBy($PDOdb, $code, 'code');
+$d->set_values(array(
+    'module'=>'PRODUCT'
+	,'code'=>$code
+	,'prev_code'=>'P2'
+    ,'title'=>$langs->trans('title'.$code)
+    ,'description'=>$langs->trans('description'.$code)
+    ,'action'=>'PRODUCT_DELETE'
     ,'cond'=>'$object->description === "Lorem ipsum"'
     ,'level'=>0
     ,'rights'=>'$user->rights->produit->creer'
-    ,'tips'=>'a:contains("P01"), a:contains("'.$langs->trans('Modify').'")'
+    ,'tips'=>'a:contains("P01"), a:contains("'.$langs->trans('Delete').'")'
 ));
 $d->save($PDOdb);
 
@@ -120,6 +143,7 @@ $d->loadBy($PDOdb, $code, 'code');
 $d->set_values(array(
     'module'=>'PROJECT'
 	,'code'=>$code
+	,'prev_code'=>''
     ,'title'=>$langs->trans('title'.$code)
     ,'description'=>$langs->trans('description'.$code)
     ,'action'=>'PROJECT_CREATE'

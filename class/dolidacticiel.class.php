@@ -14,7 +14,8 @@ class TDolidacticiel extends TObjetStd {
     function __construct() {
         $this->set_table(MAIN_DB_PREFIX.'dolidacticiel');
 
-        $this->add_champs('module,action,code', array('type'=>'string', 'index'=>true, 'length'=>100)  );
+        $this->add_champs('module,action,code', array('type'=>'string', 'index'=>true, 'length'=>100));
+		$this->add_champs('prev_code', array('type'=>'string', 'length'=>100));
         $this->add_champs('cond', array('type'=>'text'));
         $this->add_champs('level',array('type'=>'int', 'index'=>true, 'rules'=>array('min'=>0, 'max'=>2)));
         
@@ -31,7 +32,7 @@ class TDolidacticiel extends TObjetStd {
 	}	
 	
 	/*
-	 * Get all test fait et non fait avec currentUserAchievement à true ou false
+	 * Comme getAll mais renvois aussi les tests non autorisés
 	 */
 	static function getAllTest(&$PDOdb, &$user)
 	{
@@ -48,7 +49,15 @@ class TDolidacticiel extends TObjetStd {
 			$test = new TDolidacticiel;
 			$test->load($PDOdb, $row->rowid);
 			
-			$test->currentUserAchievement = $test->getUserAchievement($user->id);
+			$rights = !empty($test->rights) ? eval('return ('.$test->rights.' == 1);') : true;
+			if ($rights)
+			{
+				$test->currentUserAchievement = $test->getUserAchievement($user->id);
+			}
+			else 
+			{
+				$test->currentUserAchievement = -1;
+			}
 			
 			$TRes[] = $test;
 		}
@@ -57,7 +66,7 @@ class TDolidacticiel extends TObjetStd {
 	}
 	
 	/*
-	 * Get only test efféctué par l'utilisateur
+	 * Retourne la liste des tests autorisés par l'utilisateur
 	 */
 	static function getAll(&$PDOdb,&$user, $withAchievement=true) 
 	{
