@@ -33,7 +33,7 @@ $code = 'T1';
 $d=new TDolidacticiel;
 $d->loadBy($PDOdb, $code, 'code');
 $d->set_values(array(
-	'module'=>'TIERS'
+	'mainmenu'=>'companies'
 	,'code'=>$code
 	,'prev_code'=>''
 	,'title'=>$langs->trans('title'.$code)
@@ -42,6 +42,7 @@ $d->set_values(array(
 	,'cond'=>'$object->name === "Test"'
 	,'level'=>0
 	,'rights'=>'$user->rights->societe->creer'
+	,'mainmenutips'=>'a#mainmenua_companies'
 	,'tips'=>'a.vsmenu[href*="/societe/soc.php?action=create"]'
 	
 ));
@@ -51,7 +52,7 @@ $code = 'T2';
 $d=new TDolidacticiel;
 $d->loadBy($PDOdb, $code, 'code');
 $d->set_values(array(
-	'module'=>'TIERS'
+	'mainmenu'=>'companies'
 	,'code'=>$code
 	,'prev_code'=>'T1'
 	,'title'=>$langs->trans('title'.$code)
@@ -60,7 +61,8 @@ $d->set_values(array(
 	,'cond'=>'$object->zip != $object->oldcopy->zip'
 	,'level'=>0
 	,'rights'=>'$user->rights->societe->creer'
-	,'tips'=>'input[name=zipcode]'
+	,'mainmenutips'=>'a#mainmenua_companies'
+	,'tips'=>'table a[href*="/dolibarr37/htdocs/societe/soc.php?socid="]:contains("Test"):first,a.butAction[href*="/dolibarr37/htdocs/societe/soc.php?socid="],#formsoc input[name=zipcode]'
 ));
 $d->save($PDOdb);
 
@@ -69,16 +71,18 @@ $code = 'T3';
 $d=new TDolidacticiel;
 $d->loadBy($PDOdb, $code, 'code');
 $d->set_values(array(
-	'module'=>'TIERS'
+	'mainmenu'=>'companies'
 	,'code'=>$code
-	,'prev_code'=>'T3'
+	,'prev_code'=>'T2'
 	,'title'=>$langs->trans('title'.$code)
 	,'description'=>$langs->trans('description'.$code)
 	,'action'=>'COMPANY_DELETE'
 	,'cond'=>'$object->name === "Test"'
 	,'level'=>0
 	,'rights'=>'$user->rights->societe->supprimer'
-	,'tips'=>'span#action-delete'
+	,'mainmenutips'=>'a#mainmenua_companies'
+	,'tips'=>'table a[href*="/dolibarr37/htdocs/societe/soc.php?socid="]:contains("Test"):first,span#action-delete'
+	
 ));
 $d->save($PDOdb);
 
@@ -87,7 +91,7 @@ $code = 'P1';
 $d=new TDolidacticiel;
 $d->loadBy($PDOdb, $code, 'code');
 $d->set_values(array(
-    'module'=>'PRODUCT'
+    'mainmenu'=>'products'
 	,'code'=>$code
 	,'prev_code'=>''
     ,'title'=>$langs->trans('title'.$code)
@@ -96,6 +100,7 @@ $d->set_values(array(
     ,'cond'=>'$object->ref === "P01"'
     ,'level'=>0
     ,'rights'=>'$user->rights->produit->creer'
+	,'mainmenutips'=>'a#mainmenua_products'
     ,'tips'=>'a.vsmenu[href*="/product/card.php?leftmenu=product&action=create&type=0"]'
 ));
 $d->save($PDOdb);
@@ -105,7 +110,7 @@ $code = 'P2';
 $d=new TDolidacticiel;
 $d->loadBy($PDOdb, $code, 'code');
 $d->set_values(array(
-    'module'=>'PRODUCT'
+    'mainmenu'=>'products'
 	,'code'=>$code
 	,'prev_code'=>'P1'
     ,'title'=>$langs->trans('title'.$code)
@@ -114,6 +119,7 @@ $d->set_values(array(
     ,'cond'=>'$object->ref === "P01"'
     ,'level'=>0
     ,'rights'=>'$user->rights->produit->supprimer'
+	,'mainmenutips'=>'a#mainmenua_products'
     ,'tips'=>'a:contains("P01"), a:contains("'.$langs->trans('Modify').'")'
 ));
 $d->save($PDOdb);
@@ -123,7 +129,7 @@ $code = 'P3';
 $d=new TDolidacticiel;
 $d->loadBy($PDOdb, $code, 'code');
 $d->set_values(array(
-    'module'=>'PRODUCT'
+    'mainmenu'=>'products'
 	,'code'=>$code
 	,'prev_code'=>'P2'
     ,'title'=>$langs->trans('title'.$code)
@@ -132,6 +138,7 @@ $d->set_values(array(
     ,'cond'=>'$object->description === "Lorem ipsum"'
     ,'level'=>0
     ,'rights'=>'$user->rights->produit->creer'
+	,'mainmenutips'=>'a#mainmenua_products'
     ,'tips'=>'a:contains("P01"), a:contains("'.$langs->trans('Delete').'")'
 ));
 $d->save($PDOdb);
@@ -141,7 +148,7 @@ $code = 'PJ1';
 $d=new TDolidacticiel;
 $d->loadBy($PDOdb, $code, 'code');
 $d->set_values(array(
-    'module'=>'PROJECT'
+    'mainmenu'=>'project'
 	,'code'=>$code
 	,'prev_code'=>''
     ,'title'=>$langs->trans('title'.$code)
@@ -150,6 +157,7 @@ $d->set_values(array(
     ,'cond'=>''
     ,'level'=>0
     ,'rights'=>'$user->rights->projet->creer'
+	,'mainmenutips'=>'a#mainmenua_project'
     ,'tips'=>'a.vsmenu[href*="/projet/card.php?leftmenu=projects&action=create"]'
 ));
 $d->save($PDOdb);

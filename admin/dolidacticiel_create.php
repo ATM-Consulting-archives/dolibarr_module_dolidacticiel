@@ -135,6 +135,7 @@ if (GETPOST('create_test'))
 	
 	$test->action = trim(GETPOST('action'));
 	$test->code = trim(GETPOST('code'));
+	$test->prev_code = trim(GETPOST('prev_code'));
 	$test->cond = trim(GETPOST('cond'));
 	$test->level = trim(GETPOST('level'));
 	$test->title = trim(GETPOST('title'));
@@ -175,6 +176,11 @@ if (GETPOST('create_test'))
 	<p>
 		<label>Code</label>
 		<input type="text" name="code" value="" />
+	</p>
+	
+	<p>
+		<label>Code précédent</label>
+		<input type="text" name="prev_code" value="" />
 	</p>
 	
 	<p>

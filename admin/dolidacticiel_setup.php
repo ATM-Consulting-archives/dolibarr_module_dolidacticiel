@@ -157,7 +157,6 @@ foreach ($TDolidacticielByUser as $row)
 			if ($dacticiel->currentUserAchievement > 0) $picto = img_picto($langs->transnoentitiesnoconv('DolidacticielCheck'), 'statut4');
 			elseif ($dacticiel->currentUserAchievement == 0) $picto = img_picto($langs->transnoentitiesnoconv('DolidacticielUncheck'), 'statut8');
 			else $picto = img_picto($langs->transnoentitiesnoconv('DolidacticielNotAutorized'), 'statut5');
-			//$picto = $dacticiel->currentUserAchievement > 0 ? img_picto($langs->transnoentitiesnoconv('DolidacticielCheck'), 'statut4') : img_picto($langs->transnoentitiesnoconv('DolidacticielUncheck'), 'statut8');
 			
 			$var=!$var;
 			print '<tr class="'.($var ? 'pair' : 'impair').'">';

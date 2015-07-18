@@ -14,12 +14,12 @@ class TDolidacticiel extends TObjetStd {
     function __construct() {
         $this->set_table(MAIN_DB_PREFIX.'dolidacticiel');
 
-        $this->add_champs('module,action,code', array('type'=>'string', 'index'=>true, 'length'=>100));
+        $this->add_champs('mainmenu,action,code', array('type'=>'string', 'index'=>true, 'length'=>100));
 		$this->add_champs('prev_code', array('type'=>'string', 'length'=>100));
         $this->add_champs('cond', array('type'=>'text'));
         $this->add_champs('level',array('type'=>'int', 'index'=>true, 'rules'=>array('min'=>0, 'max'=>2)));
         
-        $this->_init_vars('title,description,rights,tips');
+        $this->_init_vars('title,description,rights,mainmenutips,tips');
         
 	    $this->start();
 	
@@ -143,7 +143,7 @@ class TDolidacticiel extends TObjetStd {
 				$d->TDolidacticielUser[$k]->achievement=1;
 				$d->save($PDOdb);
 				
-				setEventMessage('GG WP'.$d->code.' : '.$d->title."\n".$d->description);
+				setEventMessage('GG WP '.$d->code.' : '.$d->title."\n".$d->description);
 				
 			}
 			
@@ -163,6 +163,17 @@ class TDolidacticiel extends TObjetStd {
 		
 		return false;
 	}
+	
+	function prevCodeAchievement(&$PDOdb, &$user)
+	{
+		if (empty($this->prev_code)) return true;
+		
+		$prevTest = new TDolidacticiel;
+		$prevTest->loadBy($PDOdb, $this->prev_code, 'code', true);
+
+		return $prevTest->getUserAchievement($user->id);
+	}
+	
 }
 
 Class TDolidacticielUser extends TObjetStd {
