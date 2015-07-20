@@ -139,7 +139,7 @@ $TDolidacticielByUser = TDolidacticiel::getAllUser($PDOdb, $db, $conf);
 print '<table class="noborder" width="100%">';
 print '<tr class="liste_titre">';
 print '<td>'.$langs->trans("DolidacticielListOfUserAchievement").'</td>';
-
+print '</tr>';
 foreach ($TDolidacticielByUser as $row)
 {
 	$u = $row['user'];
@@ -160,16 +160,17 @@ foreach ($TDolidacticielByUser as $row)
 			
 			$var=!$var;
 			print '<tr class="'.($var ? 'pair' : 'impair').'">';
-			print '<td>&nbsp;&nbsp;&nbsp;&nbsp;'.$picto.'&nbsp;'.$dacticiel->description.'</td>';
+			print '<td>&nbsp;&nbsp;&nbsp;&nbsp;'.$picto.'&nbsp;'.$dacticiel->description.'</td></tr>';
 		}	
 	}
 	else
 	{
 		$var=!$var;
 		print '<tr class="'.($var ? 'pair' : 'impair').'">';
-		print '<td>&nbsp;&nbsp;&nbsp;&nbsp;'.img_picto('', '1rightarrow').'&nbsp;<em>'.$langs->trans('DolidacticielNoTestAvailable').'</em></td>';
+		print '<td>&nbsp;&nbsp;&nbsp;&nbsp;'.img_picto('', '1rightarrow').'&nbsp;<em>'.$langs->trans('DolidacticielNoTestAvailable').'</em></td></tr>';
 	}
 	
+	print '</tr>';
 }
 
 /*print '<table class="noborder" width="100%">';

@@ -9,20 +9,34 @@ dolidacticielAbout = A propos du module dolidacticiel
 Achievements=Réussites
 
 DolidacticielOthersTests=Autres tests
+DolidacticielListOfModuleByATMTitle=Titre
+DolidacticielListOfModuleByATMDescription=Description
+DolidacticielListOfModuleByATMDolistore=Lien Dolistore
+DolidacticielTestAvailable=Test disponible
+DolidacticielTestUnavailable=Module non installé ou non activé
+
+Dolidacticiel_module_inventory=<a href="https://www.dolistore.com/fr/modules/500-Inventaire-3-6-3-7-.html" target="_blank">Voir</a>
 
 titleT1=Votre premier tiers
-descriptionT1=Creez un tiers nommé "Test" (en respectant cette orthographe précis)
+descriptionT1=Créez un tiers nommé "Test" (en respectant cette orthographe précise)
 titleT2=Modifiez un tiers
 descriptionT2=Changez son code postal
 titleT3=Suppression d'un tiers
 descriptionT3=Supprimez le tiers nommé "Test"
 
 titleP1=Votre premier produit
-descriptionP1=Creez un produit avec la référence "P01" (en respectant cette orthographe précis)
-titleP2=Modifiez le produit
-descriptionP2=Changez sa description avec "Lorem ipsum" (en respectant cette orthographe précis)
+descriptionP1=Créez un produit avec la référence "P01" (en respectant cette orthographe précise)
+titleP2=Modifiez un produit
+descriptionP2=Changez sa description avec "Lorem ipsum" (en respectant cette orthographe précise)
+titleP3=Suppression d'un produit
+descriptionP3=Supprimez le produit avec la référence "P01"
+
 titlePJ1=Votre premier projet
 descriptionPJ1=Creez un projet
+
+titleINV1=Créer un inventaire
+descriptionINV1=Créer un inventaire nommé "Mon inventaire"
+DolidacticielTitleInventoryForTest=Mon inventaire
 
 DolidacticielListOfUserAchievement=Liste des réussites par utilisateur
 DolidacticielResultAchievement=Fait / Pas fait

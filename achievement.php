@@ -20,7 +20,7 @@
     
 	$PDOdb = new TPDOdb;
 	
-	$Tab= TDolidacticiel::getAll($PDOdb, $u);
+	$Tab= TDolidacticiel::getAll($PDOdb, $u, $conf);
 	
 	print '<table class="border" width="100%">';
 	foreach($Tab as &$d) {

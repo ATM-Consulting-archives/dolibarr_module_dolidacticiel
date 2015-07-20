@@ -3,7 +3,7 @@
     require('../config.php');
     dol_include_once('/dolidacticiel/class/dolidacticiel.class.php');
     $PDOdb=new TPDOdb;
-    $Tab= TDolidacticiel::getAll($PDOdb, $user); 
+    $Tab= TDolidacticiel::getAll($PDOdb, $user, $conf); 
 	$mainmenu = $_SESSION['mainmenu'];
     //echo "console.log(JSON.parse('".json_encode($Tab)."'));";  //équivalent d'un var_dump();
 ?>

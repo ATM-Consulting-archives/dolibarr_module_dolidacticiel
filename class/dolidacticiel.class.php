@@ -15,10 +15,11 @@ class TDolidacticiel extends TObjetStd {
         $this->set_table(MAIN_DB_PREFIX.'dolidacticiel');
 
         $this->add_champs('mainmenu,action,code', array('type'=>'string', 'index'=>true, 'length'=>100));
-		$this->add_champs('prev_code', array('type'=>'string', 'length'=>100));
+		$this->add_champs('prev_code,module_name', array('type'=>'string', 'length'=>100));
         $this->add_champs('cond', array('type'=>'text'));
         $this->add_champs('level',array('type'=>'int', 'index'=>true, 'rules'=>array('min'=>0, 'max'=>2)));
-        
+        $this->add_champs('from_atm', array('type'=>'int'));
+		
         $this->_init_vars('title,description,rights,mainmenutips,tips');
         
 	    $this->start();
@@ -31,10 +32,26 @@ class TDolidacticiel extends TObjetStd {
 		return 2;
 	}	
 	
+	static function getAllByATM(&$PDOdb, &$conf)
+	{
+		$TRes = array();
+		$TIdTest = $PDOdb->ExecuteAsArray("SELECT rowid FROM ".MAIN_DB_PREFIX."dolidacticiel WHERE from_atm = 1");
+		
+		foreach ($TIdTest as $row)
+		{
+			$test = new TDolidacticiel;
+			$test->load($PDOdb, $row->rowid);
+			
+			$TRes[] = $test;
+		}
+		
+		return $TRes;
+	}
+	
 	/*
 	 * Comme getAll mais renvois aussi les tests non autorisés
 	 */
-	static function getAllTest(&$PDOdb, &$user)
+	static function getAllTest(&$PDOdb, &$user, &$conf)
 	{
 		$level = self::getLevelFromUser($user);
 		
@@ -68,7 +85,7 @@ class TDolidacticiel extends TObjetStd {
 	/*
 	 * Retourne la liste des tests autorisés par l'utilisateur
 	 */
-	static function getAll(&$PDOdb,&$user, $withAchievement=true) 
+	static function getAll(&$PDOdb,&$user,&$conf, $withAchievement=true) 
 	{
 		$level = self::getLevelFromUser($user);
 		
@@ -112,7 +129,7 @@ class TDolidacticiel extends TObjetStd {
 			
 			$TRes[] = array(
 				'user' => $user
-				,'dolidacticiel' => TDolidacticiel::getAllTest($PDOdb, $user)
+				,'dolidacticiel' => TDolidacticiel::getAll($PDOdb, $user, $conf)
 			);
 		}
 		
