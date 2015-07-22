@@ -141,7 +141,7 @@ $d->set_values(array(
     ,'level'=>0
     ,'rights'=>'$user->rights->produit->creer'
 	,'mainmenutips'=>'a#mainmenua_products'
-    ,'tips'=>'a:contains("P01"), a:contains("'.$langs->trans('Delete').'")'
+    ,'tips'=>'a:contains("P01"), span#action-delete)'
 	,'module_name'=>'product'
 ));
 $d->save($PDOdb);
@@ -173,7 +173,7 @@ $d->loadBy($PDOdb, $code, 'code');
 $d->set_values(array(
 	'mainmenu'=>'products'
 	,'code'=>$code
-	,'prev_code'=>'P3'
+	,'prev_code'=>''
 	,'title'=>$langs->trans('title'.$code)
 	,'description'=>$langs->trans('description'.$code)
 	,'action'=>'ABRICOT_SAVE'
