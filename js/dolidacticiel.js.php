@@ -47,7 +47,7 @@ $(document).ready(function() {
 							if (!positionFound) TTipsOffSet.push({"left":left,"top":top,"ids":new Array("tips_"+xy)});
 							
 			                if(offset && top>0) {
-			                    $("body").append(\'<div id="tips_\'+xy+\'" style="position:absolute; left:\'+(left)+\'px; top:\'+(top)+\'px;" class="dolidacticielTips"><span class="code">'.$test->code.'</span><div class="content"><strong>'.$test->title.'</strong><br />'.$test->description.'</div></div>\');   
+			                    $("body").append(\'<div id="tips_\'+xy+\'" style="position:absolute; left:\'+(left)+\'px; top:\'+(top)+\'px;" class="dolidacticielTips '.($mainmenu == $test->mainmenu ? '' : 'tipTopMenu').'"><span class="code">'.$test->code.'</span><div class="content"><strong>'.$test->title.'</strong><br />'.$test->description.'</div></div>\');   
 			                }
 						}
 		                
@@ -62,7 +62,7 @@ $(document).ready(function() {
 	    {
 	    	if (TTipsOffSet[i].ids.length > 1) //uniquement les tableaux de tips avec + de 1 element superposé
 	    	{
-	    		var masterTips = $("<div class='masterTips' style='position:absolute; left:"+TTipsOffSet[i].left+"px; top:"+TTipsOffSet[i].top+"px;width:100%;'></div>");
+	    		var masterTips = $("<div class='masterTips' style='position:absolute; left:"+TTipsOffSet[i].left+"px;top:"+TTipsOffSet[i].top+"px;'></div>");
 	    		var currentTop = 0;
 	    		
 	    		for (var j = 0; j < TTipsOffSet[i].ids.length; j++)
@@ -80,7 +80,7 @@ $(document).ready(function() {
 	    		$("body").append(masterTips);
 	    	}
 	    }
-	    
+	 
 	});
 
 });
