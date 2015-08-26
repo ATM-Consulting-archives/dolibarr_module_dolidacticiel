@@ -143,7 +143,7 @@ class TDolidacticiel extends TObjetStd {
 		$TRes = $PDOdb->ExecuteAsArray("SELECT d.rowid 
 					FROM ".MAIN_DB_PREFIX."dolidacticiel d 
 					LEFT JOIN ".MAIN_DB_PREFIX."dolidacticiel_user du ON (du.fk_dolidacticiel = d.rowid AND du.fk_user=".$user->id.")
-					WHERE d.action  = '".$action."' AND d.level<=".$level." AND du.achievement IS NULL");
+					WHERE FIND_IN_SET('".$action."', d.action) AND d.level<=".$level." AND du.achievement IS NULL");
 					
 		foreach($TRes as $row) {
 			
@@ -166,6 +166,16 @@ class TDolidacticiel extends TObjetStd {
 			
 		}	
 		
+	}
+	
+	/*
+	 * Permet de vérifier que l'objet est bien associé au bon Tiers
+	 * Exemple voir test C1
+	 */
+	static function checkSocId(&$PDOdb, &$object, $name='')
+	{
+		$TRes = $PDOdb->ExecuteAsArray('SELECT rowid FROM '.MAIN_DB_PREFIX.'societe WHERE rowid='.($object->socid ? $object->socid : $object->fk_soc).' AND nom="'.$name.'"');
+		return count($TRes) > 0 ? 1: 0;
 	}
 	
 	function getUserAchievement($fk_user) {

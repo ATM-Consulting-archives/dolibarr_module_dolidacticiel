@@ -23,6 +23,11 @@ titleT2=Modifiez un tiers
 descriptionT2=Changez son code postal
 titleT3=Suppression d'un tiers
 descriptionT3=Supprimez le tiers nommé "Test"
+titleT4=Nouveau tiers
+descriptionT4=Créez un tiers nommé "Ciel & Terre" (en respectant cette orthographe précise) puis rattaché un nouveau contact
+
+titleC1=Votre premier contact
+descriptionC1=Créez un contact rattaché au tiers "Ciel & Terre". Son nom est "Dupond" et son prénom "Pierre" 
 
 titleP1=Votre premier produit
 descriptionP1=Créez un produit avec la référence "P01" (en respectant cette orthographe précise)

@@ -86,6 +86,43 @@ $d->set_values(array(
 ));
 $d->save($PDOdb);
 
+$code = 'T4';
+$d=new TDolidacticiel;
+$d->loadBy($PDOdb, $code, 'code');
+$d->set_values(array(
+	'mainmenu'=>'companies'
+	,'code'=>$code
+	,'prev_code'=>'T3'
+	,'title'=>$langs->trans('title'.$code)
+	,'description'=>$langs->trans('description'.$code)
+	,'action'=>'COMPANY_CREATE'
+	,'cond'=>'$object->name === "Ciel & Terre"'
+	,'level'=>0
+	,'rights'=>'$user->rights->societe->creer'
+	,'mainmenutips'=>'a#mainmenua_companies'
+	,'tips'=>'a.vsmenu[href*="/societe/soc.php?action=create"]'
+	,'module_name'=>'societe'
+));
+$d->save($PDOdb);
+
+$code = 'C1';
+$d=new TDolidacticiel;
+$d->loadBy($PDOdb, $code, 'code');
+$d->set_values(array(
+	'mainmenu'=>'companies'
+	,'code'=>$code
+	,'prev_code'=>'T4'
+	,'title'=>$langs->trans('title'.$code)
+	,'description'=>$langs->trans('description'.$code)
+	,'action'=>'CONTACT_CREATE,CONTACT_MODIFY'
+	,'cond'=>'$object->lastname === "Dupond" && $object->firstname === "Pierre" && self::checkSocId($PDOdb, $object, "Ciel & Terre")'
+	,'level'=>0
+	,'rights'=>'$user->rights->societe->creer'
+	,'mainmenutips'=>'a#mainmenua_companies'
+	,'tips'=>'a.vsmenu[href*="/contact/card.php?leftmenu=contacts&action=create"]'
+	,'module_name'=>'societe'
+));
+$d->save($PDOdb);
 
 $code = 'P1';
 $d=new TDolidacticiel;
