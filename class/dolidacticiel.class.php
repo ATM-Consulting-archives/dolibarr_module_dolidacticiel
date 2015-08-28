@@ -136,36 +136,36 @@ class TDolidacticiel extends TObjetStd {
 		return $TRes;
 	}
 	
-	static function testConditions(&$PDOdb,&$user,&$object, $action) {
-		
+	static function testConditions(&$PDOdb,&$user,&$object, $action, $conf)
+	{
 		$level = self::getLevelFromUser($user);
 		
 		$TRes = $PDOdb->ExecuteAsArray("SELECT d.rowid 
 					FROM ".MAIN_DB_PREFIX."dolidacticiel d 
 					LEFT JOIN ".MAIN_DB_PREFIX."dolidacticiel_user du ON (du.fk_dolidacticiel = d.rowid AND du.fk_user=".$user->id.")
 					WHERE FIND_IN_SET('".$action."', d.action) AND d.level<=".$level." AND du.achievement IS NULL");
-					
-		foreach($TRes as $row) {
-			
+
+		foreach($TRes as $row) 
+		{
 			$d = new TDolidacticiel;
 			$d->load($PDOdb, $row->rowid);
-			
+
 			$rights = !empty($d->rights) ? eval('return ('.$d->rights.' == 1);') : true;
 			$eval = !empty($d->cond) ? eval('return ('.$d->cond.');') : true;
-			
-			if($eval === true && $rights === true) {
+
+			if($eval === true && $rights === true) 
+			{
 				$k = $d->addChild($PDOdb, 'TDolidacticielUser');
 				//var_dump($d->TDolidacticielUser);
 				$d->TDolidacticielUser[$k]->fk_user = $user->id;
 				$d->TDolidacticielUser[$k]->achievement=1;
 				$d->save($PDOdb);
 				
-				setEventMessage('GG WP '.$d->code.' : '.$d->title."\n".$d->description);
-				
+				setEventMessages('GG WP '.$d->code.' : '.$d->title."\n".$d->description);
 			}
-			
-		}	
 		
+		}
+	
 	}
 	
 	/*
@@ -195,10 +195,17 @@ class TDolidacticiel extends TObjetStd {
 	{
 		if (empty($this->prev_code)) return true;
 		
-		$prevTest = new TDolidacticiel;
-		$prevTest->loadBy($PDOdb, $this->prev_code, 'code', true);
+		$TCode = explode(',', $this->prev_code);
 
-		return $prevTest->getUserAchievement($user->id);
+		foreach ($TCode as $code)
+		{
+			$prevTest = new TDolidacticiel;
+			$prevTest->loadBy($PDOdb, $code, 'code', true);
+			
+			if (!$prevTest->getUserAchievement($user->id)) return false;
+		}
+
+		return true;
 	}
 	
 }

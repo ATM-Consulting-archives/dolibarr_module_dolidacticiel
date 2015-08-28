@@ -8,7 +8,7 @@ dolidacticielAbout = A propos du module dolidacticiel
 
 Achievements=Réussites
 
-DolidacticielOthersTests=Autres tests
+DolidacticielOthersTests=Autres tests (modules ATM)
 DolidacticielListOfModuleByATMTitle=Titre
 DolidacticielListOfModuleByATMDescription=Description
 DolidacticielListOfModuleByATMDolistore=Lien Dolistore
@@ -42,6 +42,8 @@ descriptionPJ1=Creez un projet
 titleINV1=Créer un inventaire
 descriptionINV1=Créer un inventaire nommé "Mon inventaire"
 DolidacticielTitleInventoryForTest=Mon inventaire
+titleINV2=Ajouter un produit
+descriptionINV2=Ajouter un produit dans votre inventaire
 
 DolidacticielListOfUserAchievement=Liste des réussites par utilisateur
 DolidacticielResultAchievement=Fait / Pas fait

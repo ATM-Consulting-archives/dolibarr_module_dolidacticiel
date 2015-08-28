@@ -210,17 +210,36 @@ $d->loadBy($PDOdb, $code, 'code');
 $d->set_values(array(
 	'mainmenu'=>'products'
 	,'code'=>$code
-	,'prev_code'=>''
+	,'prev_code'=>'P1,STK1'
 	,'title'=>$langs->trans('title'.$code)
 	,'description'=>$langs->trans('description'.$code)
-	,'action'=>'ABRICOT_SAVE'
-	,'cond'=>'$this->title === "'.$langs->trans('DolidacticielTitleInventoryForTest').'"'
+	,'action'=>'TINVENTORY_CREATE'
+	,'cond'=>'$object->title === "'.$langs->trans('DolidacticielTitleInventoryForTest').'"'
 	,'level'=>0
 	,'rights'=>'$user->rights->inventory->create && $conf->stock->enabled'
 	,'mainmenutips'=>'a#mainmenua_products'
-	,'tips'=>'table a[href*="/htdocs/custom/inventory/inventory.php?action=create"],#confirmCreate input[name="title"]'
+	,'tips'=>'a.vsmenu[href*="/inventory/inventory.php?action=create"]'
 	,'from_atm'=>1
 	,'module_name'=>'inventory'
-	
+));
+$d->save($PDOdb);
+
+$code = 'INV2';
+$d=new TDolidacticiel;
+$d->loadBy($PDOdb, $code, 'code');
+$d->set_values(array(
+	'mainmenu'=>'products'
+	,'code'=>$code
+	,'prev_code'=>'INV1'
+	,'title'=>$langs->trans('title'.$code)
+	,'description'=>$langs->trans('description'.$code)
+	,'action'=>'TINVENTORY_UPDATE'
+	,'cond'=>'$object->title === "'.$langs->trans('DolidacticielTitleInventoryForTest').'" && count($object->TInventorydet) > 0'
+	,'level'=>0
+	,'rights'=>'$user->rights->inventory->write && $conf->stock->enabled'
+	,'mainmenutips'=>'a#mainmenua_products'
+	,'tips'=>'a.vsmenu[href*="/inventory/inventory.php?action=list"]'
+	,'from_atm'=>1
+	,'module_name'=>'inventory'
 ));
 $d->save($PDOdb);

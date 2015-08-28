@@ -122,8 +122,7 @@ class Interfacedolidacticieltrigger
         dol_include_once('/dolidacticiel/class/dolidacticiel.class.php');
         $PDOdb=new TPDOdb;
 		
-        TDolidacticiel::testConditions($PDOdb, $user, $object, $action);
-		
+        TDolidacticiel::testConditions($PDOdb, $user, $object, $action, $conf);
 		
         return 0;
     }
