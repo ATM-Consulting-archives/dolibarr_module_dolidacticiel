@@ -121,7 +121,7 @@ class Interfacedolidacticieltrigger
         dol_include_once('/dolidacticiel/config.php');
         dol_include_once('/dolidacticiel/class/dolidacticiel.class.php');
         $PDOdb=new TPDOdb;
-		
+		//if ($action != 'TDOLIDACTICIEL_LOAD' && $action != 'TDOLIDACTICIELUSER_LOAD') {var_dump($action);exit;}
         TDolidacticiel::testConditions($PDOdb, $user, $object, $action, $conf);
 		
         return 0;

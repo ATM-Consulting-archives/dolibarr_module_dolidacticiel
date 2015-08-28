@@ -161,7 +161,7 @@ class TDolidacticiel extends TObjetStd {
 				$d->TDolidacticielUser[$k]->achievement=1;
 				$d->save($PDOdb);
 				
-				setEventMessages('GG WP '.$d->code.' : '.$d->title."\n".$d->description);
+				setEventMessages('GG WP '.$d->code.' : '.$d->title."\n".$d->description, null);
 			}
 		
 		}

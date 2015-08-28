@@ -36,6 +36,9 @@ descriptionP2=Changez sa description avec "Lorem ipsum" (en respectant cette ort
 titleP3=Suppression d'un produit
 descriptionP3=Supprimez le produit avec la référence "P01"
 
+titleU1=Votre premier utilisateur
+descriptionU1=Créez un utilisateur ayant pour nom "Dupont" (en respectant cette orthographe précise)
+
 titlePJ1=Votre premier projet
 descriptionPJ1=Creez un projet
 

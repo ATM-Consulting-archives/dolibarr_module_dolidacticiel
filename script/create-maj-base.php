@@ -60,7 +60,7 @@ $d->set_values(array(
 	,'level'=>0
 	,'rights'=>'$user->rights->societe->creer'
 	,'mainmenutips'=>'a#mainmenua_companies'
-	,'tips'=>'table a[href*="/htdocs/societe/soc.php?socid="]:contains("Test"):first,a.butAction[href*="/htdocs/societe/soc.php?socid="],form[name="formsoc"] input[name=zipcode]'
+	,'tips'=>'table a[href*="/societe/soc.php?socid="]:contains("Test"):first,a.butAction[href*="/htdocs/societe/soc.php?socid="],form[name="formsoc"] input[name=zipcode]'
 	,'module_name'=>'societe'
 ));
 $d->save($PDOdb);
@@ -80,7 +80,7 @@ $d->set_values(array(
 	,'level'=>0
 	,'rights'=>'$user->rights->societe->supprimer'
 	,'mainmenutips'=>'a#mainmenua_companies'
-	,'tips'=>'table a[href*="/htdocs/societe/soc.php?socid="]:contains("Test"):first,span#action-delete'
+	,'tips'=>'table a[href*="/societe/soc.php?socid="]:contains("Test"):first,span#action-delete'
 	,'module_name'=>'societe'
 	
 ));
@@ -178,8 +178,28 @@ $d->set_values(array(
     ,'level'=>0
     ,'rights'=>'$user->rights->produit->creer'
 	,'mainmenutips'=>'a#mainmenua_products'
-    ,'tips'=>'a:contains("P01"), span#action-delete)'
+    ,'tips'=>'a:contains("P01"), span#action-delete'
 	,'module_name'=>'product'
+));
+$d->save($PDOdb);
+
+
+$code = 'U1';
+$d=new TDolidacticiel;
+$d->loadBy($PDOdb, $code, 'code');
+$d->set_values(array(
+    'mainmenu'=>'home'
+	,'code'=>$code
+	,'prev_code'=>'P2'
+    ,'title'=>$langs->trans('title'.$code)
+    ,'description'=>$langs->trans('description'.$code)
+    ,'action'=>'USER_CREATE'
+    ,'cond'=>'$object->lastname === "Dupont"'
+    ,'level'=>0
+    ,'rights'=>'$user->rights->user->user->creer'
+	,'mainmenutips'=>'a#mainmenua_home'
+    ,'tips'=>'a.vmenu[href*="/user/home.php?leftmenu=users"]'
+	,'module_name'=>'user'
 ));
 $d->save($PDOdb);
 
@@ -210,13 +230,13 @@ $d->loadBy($PDOdb, $code, 'code');
 $d->set_values(array(
 	'mainmenu'=>'products'
 	,'code'=>$code
-	,'prev_code'=>'P1,STK1'
+	,'prev_code'=>'P1'
 	,'title'=>$langs->trans('title'.$code)
 	,'description'=>$langs->trans('description'.$code)
 	,'action'=>'TINVENTORY_CREATE'
-	,'cond'=>'$object->title === "'.$langs->trans('DolidacticielTitleInventoryForTest').'"'
+	,'cond'=>'$object->title === "'.$langs->trans('DolidacticielTitleInventoryForTest').'" && $conf->stock->enabled'
 	,'level'=>0
-	,'rights'=>'$user->rights->inventory->create && $conf->stock->enabled'
+	,'rights'=>'$user->rights->inventory->create'
 	,'mainmenutips'=>'a#mainmenua_products'
 	,'tips'=>'a.vsmenu[href*="/inventory/inventory.php?action=create"]'
 	,'from_atm'=>1
