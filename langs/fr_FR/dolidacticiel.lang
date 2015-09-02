@@ -40,7 +40,14 @@ descriptionP3=Supprimez le produit avec la référence "P01"
 titleP4=Nouveau produit
 descriptionP4=Créez un produit avec pour libellé "Vaporisateur d'ambiance" (en respectant cette orthographe précise)
 titleP5=Prix fournisseur
-descriptionP5=Ajoutez un prix fournisseur au produit "Vaporisateur d'ambiance"
+descriptionP5=Ajoutez un prix fournisseur au produit "Vaporisateur d'ambiance" avec le fournisseur "Ciel & Terre"
+titleP6=Prix de vente
+descriptionP6=Ajoutez un prix de vente au produit "Vaporisateur d'ambiance"
+
+titlePC1=Votre première proposition
+descriptionPC1=Créez une proposition commercial pour le client "Ciel & Terre"
+titlePC2=Ajout d'une ligne libre
+descriptionPC2=Ajoutez une ligne libre de type produit avec une description et un PU HT à 199.90
 
 titleU1=Votre premier utilisateur
 descriptionU1=Créez un utilisateur ayant pour nom "Dupont" (en respectant cette orthographe précise)

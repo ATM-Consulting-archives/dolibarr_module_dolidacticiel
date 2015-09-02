@@ -169,7 +169,7 @@ class TDolidacticiel extends TObjetStd {
 	}
 	
 	/*
-	 * Permet de vérifier que l'objet est bien associé au bon Tiers
+	 * Permet de vérifier que l'objet est bien associé au bon Tiers/Produit
 	 * Exemple voir test C1
 	 */
 	static function checkStaticId(&$PDOdb, &$object, $table, $value)
@@ -186,7 +186,7 @@ class TDolidacticiel extends TObjetStd {
 				break;
 		}
 		
-		return count($TRes) > 0 ? 1: 0;
+		return count($TRes) > 0 ? true: false;
 	}
 	
 	static function getStaticId(&$PDOdb, $table, $field, $value)

@@ -245,6 +245,66 @@ $d->set_values(array(
 $d->save($PDOdb);
 
 
+$code = 'P6';
+$d=new TDolidacticiel;
+$d->loadBy($PDOdb, $code, 'code');
+$d->set_values(array(
+    'mainmenu'=>'products'
+	,'code'=>$code
+	,'prev_code'=>'P4'
+    ,'title'=>$langs->trans('title'.$code)
+    ,'description'=>$langs->trans('description'.$code)
+    ,'action'=>'PRODUCT_PRICE_MODIFY'
+    ,'cond'=>'self::checkStaticId($PDOdb, $object, "product", "Vaporisateur d\'ambiance")'
+    ,'level'=>0
+    ,'rights'=>'$user->rights->produit->creer'
+	,'mainmenutips'=>'a#mainmenua_products'
+    ,'tips'=>'a#price[href*="/product/price.php?id="]'
+	,'module_name'=>'product'
+));
+$d->save($PDOdb);
+
+
+$code = 'PC1';
+$d=new TDolidacticiel;
+$d->loadBy($PDOdb, $code, 'code');
+$d->set_values(array(
+    'mainmenu'=>'commercial'
+	,'code'=>$code
+	,'prev_code'=>'P6'
+    ,'title'=>$langs->trans('title'.$code)
+    ,'description'=>$langs->trans('description'.$code)
+    ,'action'=>'PROPAL_CREATE'
+    ,'cond'=>'$object->socid == self::getStaticId($PDOdb, "societe", "nom", "Ciel & Terre")'
+    ,'level'=>0
+    ,'rights'=>'$user->rights->propal->creer'
+	,'mainmenutips'=>'a#mainmenua_commercial'
+    ,'tips'=>'a.vsmenu[href*="/comm/propal.php?action=create&leftmenu=propals"]'
+	,'module_name'=>'propale'
+));
+$d->save($PDOdb);
+
+
+$code = 'PC2';
+$d=new TDolidacticiel;
+$d->loadBy($PDOdb, $code, 'code');
+$d->set_values(array(
+    'mainmenu'=>'commercial'
+	,'code'=>$code
+	,'prev_code'=>'PC1'
+    ,'title'=>$langs->trans('title'.$code)
+    ,'description'=>$langs->trans('description'.$code)
+    ,'action'=>'LINEPROPAL_INSERT'
+    ,'cond'=>'$object->product_type == 0 && $object->price === price2num(199.90)'
+    ,'level'=>0
+    ,'rights'=>'$user->rights->propal->creer'
+	,'mainmenutips'=>'a#mainmenua_commercial'
+    ,'tips'=>'label[for=prod_entry_mode_free]'
+	,'module_name'=>'propale'
+));
+$d->save($PDOdb);
+
+
 $code = 'U1';
 $d=new TDolidacticiel;
 $d->loadBy($PDOdb, $code, 'code');
