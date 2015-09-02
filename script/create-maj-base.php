@@ -100,10 +100,31 @@ $d->set_values(array(
 	,'level'=>0
 	,'rights'=>'$user->rights->societe->creer'
 	,'mainmenutips'=>'a#mainmenua_companies'
-	,'tips'=>'a.vsmenu[href*="/societe/soc.php?action=create"]'
+	,'tips'=>'a.vsmenu[href*="/societe/soc.php?leftmenu=customers&action=create&type=c"]'
 	,'module_name'=>'societe'
 ));
 $d->save($PDOdb);
+
+
+$code = 'T5';
+$d=new TDolidacticiel;
+$d->loadBy($PDOdb, $code, 'code');
+$d->set_values(array(
+	'mainmenu'=>'companies'
+	,'code'=>$code
+	,'prev_code'=>'T4'
+	,'title'=>$langs->trans('title'.$code)
+	,'description'=>$langs->trans('description'.$code)
+	,'action'=>'COMPANY_CREATE,COMPANY_MODIFY'
+	,'cond'=>'$object->fournisseur == 1'
+	,'level'=>0
+	,'rights'=>'$user->rights->societe->creer'
+	,'mainmenutips'=>'a#mainmenua_companies'
+	,'tips'=>'select#fournisseur'
+	,'module_name'=>'societe'
+));
+$d->save($PDOdb);
+
 
 $code = 'C1';
 $d=new TDolidacticiel;
@@ -115,7 +136,7 @@ $d->set_values(array(
 	,'title'=>$langs->trans('title'.$code)
 	,'description'=>$langs->trans('description'.$code)
 	,'action'=>'CONTACT_CREATE,CONTACT_MODIFY'
-	,'cond'=>'$object->lastname === "Dupond" && $object->firstname === "Pierre" && self::checkSocId($PDOdb, $object, "Ciel & Terre")'
+	,'cond'=>'$object->lastname === "Dupond" && $object->firstname === "Pierre" && self::checkStaticId($PDOdb, $object, "societe", "Ciel & Terre")'
 	,'level'=>0
 	,'rights'=>'$user->rights->societe->creer'
 	,'mainmenutips'=>'a#mainmenua_companies'
@@ -154,9 +175,9 @@ $d->set_values(array(
     ,'title'=>$langs->trans('title'.$code)
     ,'description'=>$langs->trans('description'.$code)
     ,'action'=>'PRODUCT_MODIFY'
-    ,'cond'=>'$object->ref === "P01"'
+    ,'cond'=>'$object->ref === "P01" && $object->description === "Lorem ipsum"'
     ,'level'=>0
-    ,'rights'=>'$user->rights->produit->supprimer'
+    ,'rights'=>'$user->rights->produit->creer'
 	,'mainmenutips'=>'a#mainmenua_products'
     ,'tips'=>'a:contains("P01"), a:contains("'.$langs->trans('Modify').'")'
 	,'module_name'=>'product'
@@ -174,11 +195,51 @@ $d->set_values(array(
     ,'title'=>$langs->trans('title'.$code)
     ,'description'=>$langs->trans('description'.$code)
     ,'action'=>'PRODUCT_DELETE'
-    ,'cond'=>'$object->description === "Lorem ipsum"'
+    ,'cond'=>'$object->ref === "P01"'
+    ,'level'=>0
+    ,'rights'=>'$user->rights->produit->supprimer'
+	,'mainmenutips'=>'a#mainmenua_products'
+    ,'tips'=>'a:contains("P01"), span#action-delete'
+	,'module_name'=>'product'
+));
+$d->save($PDOdb);
+
+
+$code = 'P4';
+$d=new TDolidacticiel;
+$d->loadBy($PDOdb, $code, 'code');
+$d->set_values(array(
+    'mainmenu'=>'products'
+	,'code'=>$code
+	,'prev_code'=>'P3'
+    ,'title'=>$langs->trans('title'.$code)
+    ,'description'=>$langs->trans('description'.$code)
+    ,'action'=>'PRODUCT_CREATE,PRODUCT_MODIFY'
+    ,'cond'=>'$object->label === "Vaporisateur d\'ambiance"'
     ,'level'=>0
     ,'rights'=>'$user->rights->produit->creer'
 	,'mainmenutips'=>'a#mainmenua_products'
-    ,'tips'=>'a:contains("P01"), span#action-delete'
+    ,'tips'=>'a.vsmenu[href*="/product/card.php?leftmenu=product&action=create&type=0"]'
+	,'module_name'=>'product'
+));
+$d->save($PDOdb);
+
+
+$code = 'P5';
+$d=new TDolidacticiel;
+$d->loadBy($PDOdb, $code, 'code');
+$d->set_values(array(
+    'mainmenu'=>'products'
+	,'code'=>$code
+	,'prev_code'=>'P4'
+    ,'title'=>$langs->trans('title'.$code)
+    ,'description'=>$langs->trans('description'.$code)
+    ,'action'=>'SUPPLIER_PRODUCT_BUYPRICE_UPDATE'
+    ,'cond'=>'self::checkStaticId($PDOdb, $object, "product", "Vaporisateur d\'ambiance") && GETPOST("id_fourn", "int") == self::getStaticId($PDOdb, "societe", "nom", "Ciel & Terre")'
+    ,'level'=>0
+    ,'rights'=>'$user->rights->produit->creer'
+	,'mainmenutips'=>'a#mainmenua_products'
+    ,'tips'=>'a#suppliers[href*="/product/fournisseurs.php?id="]'
 	,'module_name'=>'product'
 ));
 $d->save($PDOdb);

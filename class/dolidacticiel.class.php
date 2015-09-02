@@ -172,10 +172,28 @@ class TDolidacticiel extends TObjetStd {
 	 * Permet de vérifier que l'objet est bien associé au bon Tiers
 	 * Exemple voir test C1
 	 */
-	static function checkSocId(&$PDOdb, &$object, $name='')
+	static function checkStaticId(&$PDOdb, &$object, $table, $value)
 	{
-		$TRes = $PDOdb->ExecuteAsArray('SELECT rowid FROM '.MAIN_DB_PREFIX.'societe WHERE rowid='.($object->socid ? $object->socid : $object->fk_soc).' AND nom="'.$name.'"');
+		switch ($table) {
+			case 'societe':
+				$TRes = $PDOdb->ExecuteAsArray('SELECT rowid FROM '.MAIN_DB_PREFIX.'societe WHERE rowid='.($object->socid ? $object->socid : $object->fk_soc).' AND nom="'.$value.'"');
+				break;
+			case 'product':
+				$TRes = $PDOdb->ExecuteAsArray('SELECT rowid FROM '.MAIN_DB_PREFIX.'product WHERE rowid='.$object->id.' AND label="'.$value.'"');
+				break;
+			default:
+				return 0;
+				break;
+		}
+		
 		return count($TRes) > 0 ? 1: 0;
+	}
+	
+	static function getStaticId(&$PDOdb, $table, $field, $value)
+	{
+		$PDOdb->Execute("SELECT rowid FROM ".MAIN_DB_PREFIX.$table." WHERE ".$field." = '".$value."'");
+		if ($row = $PDOdb->Get_line()) return $row->rowid;
+		else return '';
 	}
 	
 	function getUserAchievement($fk_user) {

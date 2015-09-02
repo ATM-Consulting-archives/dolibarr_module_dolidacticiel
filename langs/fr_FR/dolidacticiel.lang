@@ -25,6 +25,8 @@ titleT3=Suppression d'un tiers
 descriptionT3=Supprimez le tiers nommé "Test"
 titleT4=Nouveau tiers
 descriptionT4=Créez un tiers nommé "Ciel & Terre" (en respectant cette orthographe précise) puis rattaché un nouveau contact
+titleT5=Fournisseur
+descriptionT5=Modifiez le tiers nommé "Ciel & Terre" en tant que fournisseur
 
 titleC1=Votre premier contact
 descriptionC1=Créez un contact rattaché au tiers "Ciel & Terre". Son nom est "Dupond" et son prénom "Pierre" 
@@ -35,6 +37,10 @@ titleP2=Modifiez un produit
 descriptionP2=Changez sa description avec "Lorem ipsum" (en respectant cette orthographe précise)
 titleP3=Suppression d'un produit
 descriptionP3=Supprimez le produit avec la référence "P01"
+titleP4=Nouveau produit
+descriptionP4=Créez un produit avec pour libellé "Vaporisateur d'ambiance" (en respectant cette orthographe précise)
+titleP5=Prix fournisseur
+descriptionP5=Ajoutez un prix fournisseur au produit "Vaporisateur d'ambiance"
 
 titleU1=Votre premier utilisateur
 descriptionU1=Créez un utilisateur ayant pour nom "Dupont" (en respectant cette orthographe précise)
