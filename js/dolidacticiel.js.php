@@ -10,8 +10,8 @@
 
 $(document).ready(function() {
 	
-	$(window).bind("load", function() {
-		
+	window.setTimeout(function() {
+	
 		var TTipsOffSet = new Array();
 		var xy = 0;
 		
@@ -47,8 +47,9 @@ $(document).ready(function() {
 							if (!positionFound) TTipsOffSet.push({"left":left,"top":top,"ids":new Array("tips_"+xy)});
 							
 			                if(offset && top>0) {
-			                    $("body").append(\'<div id="tips_\'+xy+\'" style="position:absolute; left:\'+(left)+\'px; top:\'+(top)+\'px;" class="dolidacticielTips '.($mainmenu == $test->mainmenu ? '' : 'tipTopMenu').'"><span class="code">'.$test->code.'</span><div class="content"><strong>'.$test->title.'</strong><br />'.$test->description.'</div></div>\');   
-			                }
+			                    $("body").append(\'<div id="tips_\'+xy+\'" style="position:absolute; display:none ; left:\'+(left)+\'px; top:\'+(top)+\'px;" class="dolidacticielTips '.($mainmenu == $test->mainmenu ? '' : 'tipTopMenu').'"><span class="code">'.$test->code.'</span><div class="content"><strong>'.$test->title.'</strong><br />'.$test->description.'</div></div>\');   
+			                    $("#tips_"+xy).fadeIn();
+                            }
 						}
 		                
 	                ';
@@ -81,6 +82,6 @@ $(document).ready(function() {
 	    	}
 	    }
 	 
-	});
+    }, 1000);
 
 });
