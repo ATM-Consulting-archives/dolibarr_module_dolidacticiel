@@ -14,6 +14,8 @@ DolidacticielListOfModuleByATMDescription=Description
 DolidacticielListOfModuleByATMDolistore=Lien Dolistore
 DolidacticielTestAvailable=Test disponible
 DolidacticielTestUnavailable=Module non installé ou non activé
+DolidacticielAdmin=Gestion des tests
+DolidacticielTests=Liste des tests
 
 Dolidacticiel_module_inventory=<a href="https://www.dolistore.com/fr/modules/500-Inventaire-3-6-3-7-.html" target="_blank">Voir</a>
 

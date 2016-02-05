@@ -40,8 +40,8 @@ function dolidacticielAdminPrepareHead()
     $head[$h][1] = $langs->trans("DolidacticielOthersTests");
     $head[$h][2] = 'otherstests';
     $h++;
-	$head[$h][0] = dol_buildpath("/dolidacticiel/admin/dolidacticiel_create.php", 1);
-    $head[$h][1] = $langs->trans("DolidacticielCreate");
+	$head[$h][0] = dol_buildpath("/dolidacticiel/admin/dolidacticiel_admin.php", 1);
+    $head[$h][1] = $langs->trans("DolidacticielAdmin");
     $head[$h][2] = 'create';
     $h++;
     $head[$h][0] = dol_buildpath("/dolidacticiel/admin/dolidacticiel_about.php", 1);

@@ -130,18 +130,18 @@ $code = 'C1';
 $d=new TDolidacticiel;
 $d->loadBy($PDOdb, $code, 'code');
 $d->set_values(array(
-	'mainmenu'=>'companies'
-	,'code'=>$code
-	,'prev_code'=>'T4'
-	,'title'=>$langs->trans('title'.$code)
-	,'description'=>$langs->trans('description'.$code)
-	,'action'=>'CONTACT_CREATE,CONTACT_MODIFY'
-	,'cond'=>'$object->lastname === "Dupond" && $object->firstname === "Pierre" && self::checkStaticId($PDOdb, $object, "societe", "Ciel & Terre")'
-	,'level'=>0
-	,'rights'=>'$user->rights->societe->creer'
-	,'mainmenutips'=>'a#mainmenua_companies'
-	,'tips'=>'a.vsmenu[href*="/contact/card.php?leftmenu=contacts&action=create"]'
-	,'module_name'=>'societe'
+	'mainmenu'=>'companies' //nom du menu
+	,'code'=>$code //identifiant unique du test
+	,'prev_code'=>'T4' //identifiant unique du test précédent
+	,'title'=>$langs->trans('title'.$code) //Titre dans l'info-bulle
+	,'description'=>$langs->trans('description'.$code) //Description dans l'info-bulle
+	,'action'=>'CONTACT_CREATE,CONTACT_MODIFY' //Vérification si test acomplie lors de l'appel des triggers spécifiés
+	,'cond'=>'$object->lastname === "Dupond" && $object->firstname === "Pierre" && self::checkStaticId($PDOdb, $object, "societe", "Ciel & Terre")' //Condition à remplir pour vérifier le test
+	,'level'=>0 //Sert à rien pour le moment
+	,'rights'=>'$user->rights->societe->creer' //Droit nécessaire pour acomplir le test
+	,'mainmenutips'=>'a#mainmenua_companies' //Lien sur lequel doit apparaître l'infobulle pour le menu haut
+	,'tips'=>'a.vsmenu[href*="/contact/card.php?leftmenu=contacts&action=create"]' //Lien sur lequel doit apparaître l'infobulle dans la page
+	,'module_name'=>'societe' //Nom du module concerné par le test
 ));
 $d->save($PDOdb);
 
